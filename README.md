@@ -22,8 +22,10 @@ Release tag: **v1.0.0**
 
 - GitHub: https://github.com/yankeeyankee99/DP-Indicator
 - Release: https://github.com/yankeeyankee99/DP-Indicator/releases/tag/v1.0.0
-- Zenodo DOI: *(add after this GitHub release is archived to Zenodo)*
+- Zenodo DOI: [10.5281/zenodo.21896918](https://doi.org/10.5281/zenodo.21896918)
 - Preferred citation metadata: see [`CITATION.cff`](CITATION.cff)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21896918.svg)](https://doi.org/10.5281/zenodo.21896918)
 
 Please cite both the paper (when available) and this software release (DOI).
 

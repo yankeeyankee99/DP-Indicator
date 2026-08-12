@@ -14,13 +14,13 @@
       "generated_provenance": "opensource_prep.v1_0_0_github"
     },
     {
-      "byte_size": 907,
+      "byte_size": 869,
       "classification": "GENERATED",
       "path": "CITATION.cff",
-      "reason": "citation metadata for Zenodo/GitHub",
+      "reason": "citation metadata with Zenodo DOI",
       "safety": "approved_generated_artifact",
-      "sha256": "39d427684b41a98ec20dbee142429b51d8531f3745cf0d0b54c4834f640bcbbb",
-      "generated_provenance": "opensource_prep.v1_0_0_github"
+      "sha256": "2361c33075ad84f83aa44e93219f1b7563ba7488bcff0595694b375d4b53eb47",
+      "generated_provenance": "opensource_prep.zenodo_doi"
     },
     {
       "byte_size": 10140,
@@ -32,13 +32,13 @@
       "sha256": "bb28c48e3e078166e91cfc2b6db7ffebb8a0973b9e23b3df060561292d8d69ec"
     },
     {
-      "byte_size": 3548,
+      "byte_size": 3668,
       "classification": "GENERATED",
       "path": "README.md",
-      "reason": "public README for v1.0.0 release",
+      "reason": "public README with Zenodo DOI",
       "safety": "approved_generated_artifact",
-      "sha256": "7a34f13ca6bcd82b70e8debd07219ef08b3eb4cbee7e34a0a9a8431f5b35fd45",
-      "generated_provenance": "opensource_prep.v1_0_0_github"
+      "sha256": "f7a9b7d8ae7ed9c58e4fe96ba029b50785482f59f48b70cde9640fd41c51b49a",
+      "generated_provenance": "opensource_prep.zenodo_doi"
     },
     {
       "byte_size": 530,
@@ -570,7 +570,7 @@
   ],
   "layer": "public_release",
   "public_tree_sha256": "b3e12f5c6daf866f12debfaf9a09c92fe6e230919a8594634348fa2d9fd70cd8",
-  "publication_state": "fix10_public_v1_0_0_github",
+  "publication_state": "fix10_public_v1_0_0_zenodo",
   "publishes_target": true,
   "schema_version": 1,
   "source_root_name": "DP-Indicator-fix10",
@@ -578,6 +578,6 @@
     "algorithm": "For each selected file, sort by POSIX path; form path + TAB + lowercase SHA-256(file bytes); join lines with LF and SHA-256 the UTF-8 bytes (no trailing LF).",
     "coverage": "All PUBLIC_RELEASE_MANIFEST.json entries[].path; the manifest file itself and runtime caches are excluded.",
     "entry_count": 57,
-    "sha256": "2efecad2086fc1981ca96a47b6762b437ec8d53395887791feea0119dfc4537e"
+    "sha256": "a9da11745a12446d16631025ebc2b671e23e29f2ffcd6ab187f679ae5438b9c7"
   }
 }

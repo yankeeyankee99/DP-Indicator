@@ -6,6 +6,10 @@ version: "1.0.0"
 license: Apache-2.0
 repository-code: "https://github.com/yankeeyankee99/DP-Indicator"
 url: "https://github.com/yankeeyankee99/DP-Indicator/releases/tag/v1.0.0"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21896918"
+    description: This version of the software (v1.0.0)
 authors:
   - family-names: Yan
     given-names: Kai
@@ -20,8 +24,3 @@ keywords:
   - target discovery
   - Kv1.3
   - IgA nephropathy
-# After Zenodo archives v1.0.0, add:
-# identifiers:
-#   - type: doi
-#     value: 10.5281/zenodo.<ZENODORID>
-#     description: This version of the software
