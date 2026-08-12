@@ -1,0 +1,102 @@
+# DP-Indicator fix10 — 配置文件
+
+target:
+  name: ""              # 靶点名(运行时填入)
+  synonyms: []           # 别名
+
+# LLM 配置(多模型分工 + 并发控制)
+# 分工原则：每个任务类型固定绑定高性能模型，保证行为一致性
+# 并发控制：每个模型有上限，防止同时大量调用导致 429/超时
+llm:
+  # 任务 → 模型映射
+  intent_model: "bh:qwen-max"
+  retriever_model: "bh:deepseek-v3.2"
+  grader_model: "bh:qwen-max"
+  reasoner_model: "bh:glm-5.1"
+  feasibility_model: "bh:glm-5.1"
+  critic_model: "bh:deepseek-v3.2"
+  report_model: "bh:glm-5.1"
+  fulltext_model: "bh:deepseek-v3.2"
+  prioritizer_model: "bh:glm-5.1"
+  verifier_model: "bh:glm-5.1"
+  synthesizer_model: "bh:deepseek-v3.2"
+  api_key_env: "BH_API_KEY"
+
+# 模型并发上限(每模型同时最多 N 个请求)
+model_concurrency:
+  glm-5.1: 3
+  deepseek-v3.2: 4
+  qwen-max: 4
+
+# 假设评分维度权重(G1, G2=evidence_landscape, G3, G4=feasibility)
+# G2/G4 merged: target studied deeply + disease studied deeply + scarce direct link = high score
+scoring:
+  G1_rationality: 0.30
+  G2_evidence_landscape: 0.35
+  G3_falsifiability: 0.20
+  G4_feasibility: 0.15
+  pass_threshold: 0.30   # 生成层通过阈值
+  rank_threshold: 0.55   # 上榜阈值
+
+# 因果链层数
+chain:
+  n_levels: 5
+  levels:
+    - id: "L1"
+      name: "分子"
+      description: "靶点蛋白/基因的分子特性"
+    - id: "L2"
+      name: "细胞"
+      description: "靶点表达的细胞类型及功能"
+    - id: "L3"
+      name: "组织"
+      description: "相关组织微环境"
+    - id: "L4"
+      name: "系统"
+      description: "生理系统级调控"
+    - id: "L5"
+      name: "疾病"
+      description: "适应症/表型"
+
+# 数据库客户端
+databases:
+  pubmed:
+    enabled: true
+    base_url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+    rate_limit: 3  # req/s(有 API key 可到 10)
+  europe_pmc:
+    enabled: true
+    base_url: "https://www.ebi.ac.uk/europepmc/webservices/rest"
+    rate_limit: 5
+  chembl:
+    enabled: true
+    base_url: "https://www.ebi.ac.uk/chembl/api/data"
+    rate_limit: 5
+  kegg:
+    enabled: true
+    base_url: "https://rest.kegg.jp"
+    rate_limit: 5
+  uniprot:
+    enabled: true
+    base_url: "https://rest.uniprot.org/uniprotkb"
+    rate_limit: 5
+  opentargets:
+    enabled: true
+    base_url: "https://api.platform.opentargets.org/api/v4/graphql"
+    rate_limit: 2
+  gwas:
+    enabled: true
+    base_url: "https://www.ebi.ac.uk/gwas/rest/api"
+    rate_limit: 5
+  clinicaltrials:
+    enabled: true
+    base_url: "https://clinicaltrials.gov/api/v2"
+    rate_limit: 5
+  biorxiv:
+    enabled: true
+    base_url: "https://api.biorxiv.org"
+    rate_limit: 3
+  mondo:
+    enabled: true
+    base_url: "https://www.ebi.ac.uk/ols4/api"
+    rate_limit: 5

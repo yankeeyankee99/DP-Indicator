@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use DP-Indicator, please cite this software release and the associated paper when available."
+type: software
+title: "DP-Indicator: multi-agent target–indication exploration"
+version: "1.0.0"
+license: Apache-2.0
+repository-code: "https://github.com/yankeeyankee99/DP-Indicator"
+url: "https://github.com/yankeeyankee99/DP-Indicator/releases/tag/v1.0.0"
+authors:
+  - family-names: Yan
+    given-names: Kai
+    affiliation: "China Pharmaceutical University"
+  - family-names: Guo
+    given-names: Wei
+    affiliation: "China Pharmaceutical University"
+    email: guowei1205@cpu.edu.cn
+keywords:
+  - multi-agent systems
+  - drug indication
+  - target discovery
+  - Kv1.3
+  - IgA nephropathy
+# After Zenodo archives v1.0.0, add:
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.<ZENODORID>
+#     description: This version of the software

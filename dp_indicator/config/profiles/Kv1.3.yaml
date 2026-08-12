@@ -1,0 +1,154 @@
+# DP-Indicator fix10 — Kv1.3 Target Profile
+# This file is hot-loaded at runtime. Edit and restart to apply.
+#
+# The profile uses two generic mechanistic bridges: humoral_immunity (an
+# antibody-secreting-cell axis) and macrophage_polarization (a
+# tissue-macrophage-inflammation axis).
+# Both are relevant to dozens of antibody-mediated and/or inflammatory diseases,
+# not uniquely to any one of them. The reasoning guidance adds a generic
+# convergence principle, with no disease or organ named: the criterion that
+# a therapy hitting both an antibody-producing-cell axis and a local tissue-
+# macrophage-inflammation axis simultaneously is mechanistically distinct from
+# single-axis therapies. This is a general immunology/pharmacology criterion, not a
+# disease-specific claim, and it is stated at that level of abstraction throughout.
+
+target_id: Kv1.3
+official_name: KCNA3 (potassium voltage-gated channel subfamily A member 3)
+
+cell_type_expression:
+  effector_memory_T_cell:
+    level: high
+    channels_per_cell: 1500
+    dependency: Kv1.3-dominant
+  naive_T_cell:
+    level: low
+    channels_per_cell: 250
+    dependency: KCa3.1-dominant
+  central_memory_T_cell:
+    level: low
+    channels_per_cell: 250
+    dependency: KCa3.1-dominant
+  plasma_cell:
+    level: high
+    channels_per_cell: 1200
+    dependency: Kv1.3-dominant
+  memory_B_cell:
+    level: high
+    channels_per_cell: 1000
+    dependency: Kv1.3-dominant
+  naive_B_cell:
+    level: low
+    channels_per_cell: 200
+    dependency: KCa3.1-dominant
+  M1_macrophage:
+    level: upregulated
+    dependency: Kv1.3-dominant
+  M2_macrophage:
+    level: low
+    dependency: KCa3.1-dominant
+  activated_microglia:
+    level: upregulated
+    dependency: Kv1.3-dominant
+
+functional_chain:
+  - Kv1.3 opening → K+ efflux
+  - Maintained negative membrane potential
+  - Sustained Ca2+ influx via CRAC channels
+  - Calcineurin activation
+  - NFAT nuclear translocation
+  - Cytokine transcription / proliferation / differentiation
+
+therapeutic_window:
+  suppressed:
+    - effector_memory_T_cell
+    - M1_macrophage
+    - plasma_cell
+    - memory_B_cell
+    - activated_microglia
+  spared:
+    - naive_T_cell
+    - central_memory_T_cell
+    - naive_B_cell
+    - M2_macrophage
+
+mechanistic_bridges:
+  - axis: humoral_immunity
+    cell_types:
+      - plasma_cell
+      - memory_B_cell
+      - naive_B_cell
+    mechanism: >-
+      Plasma cells (1200+ Kv1.3 channels/cell, Kv1.3-dominant) and memory B cells
+      (1000 channels/cell, Kv1.3-dominant) are the primary drivers of pathogenic
+      autoantibody production. Kv1.3 inhibition selectively suppresses these antibody-secreting
+      populations while sparing naive B cells (KCa3.1-dominant, 200 channels/cell),
+      creating a therapeutic window that targets humoral immunity without broad immunosuppression.
+
+  - axis: macrophage_polarization
+    cell_types:
+      - M1_macrophage
+      - M2_macrophage
+    mechanism: >-
+      M1 macrophages upregulate Kv1.3 during activation (vs. M2 low/KCa3.1-dominant).
+      Kv1.3 blockade shifts the M1/M2 balance, reducing TNFα/IL-1β/IL-6 production
+      at inflammatory sites and promoting tissue repair.
+
+mechanism_scope:
+  description: >-
+    This profile models Kv1.3/KCNA3's role in IMMUNE CELL activation — the Ca2+/calcineurin/NFAT
+    signaling cascade downstream of antigen-receptor engagement in T cells, B cells/plasma cells,
+    and inflammatory activation in macrophages/microglia (see cell_type_expression and
+    functional_chain above). Kv1.3/KCNA3 also has a separate, well-documented role in neuronal
+    and neuromuscular excitability (action-potential repolarization, channelopathy-adjacent
+    biology), which is a distinct signaling mechanism NOT modeled by this profile's
+    cell_type_expression / functional_chain — no neuronal/muscle cell types appear there at all.
+    Gene-level disease-association lookups (e.g. OpenTargets, KEGG) surface associations from
+    BOTH of Kv1.3's roles indiscriminately, since they operate at the gene level rather than the
+    cell-type/mechanism level. Associations that reflect the neuronal/neuromuscular-excitability
+    role are out of this profile's mechanistic scope and should not be treated as "this target's
+    established immune-modulation indications" — they simply belong to a different mechanism this
+    profile does not address, regardless of which specific disease they name.
+  out_of_scope_keywords:
+    - myasthenic
+    - myasthenia
+    - neuromuscular junction
+    - channelopathy
+    - action potential
+    - axon
+    - axonal
+    - myelin
+    - seizure
+    - epilep
+    - neurodevelopmental
+
+intersection_guidance: >-
+  When generating hypotheses, consider intersections between mechanism dimensions
+  and disease dimensions. Look for combinations where:
+  (1) the target's mechanism is strongly relevant,
+  (2) a disease category involves that mechanism,
+  (3) but the target has NOT been directly studied in that disease.
+  These intersections — where mechanism rationale exists but direct evidence does not —
+  represent the most promising novel therapeutic opportunities.
+
+reasoning_guidance:
+  - >-
+    CONVERGENCE PRINCIPLE (general mechanistic criterion, applies regardless of which candidate
+    disease is under consideration): a therapy that suppresses BOTH an antibody-secreting-cell
+    axis (humoral_immunity bridge above) AND a local tissue-macrophage-inflammation axis
+    (macrophage_polarization bridge above) acts through two independent pathogenic mechanisms at
+    once. This is mechanistically distinct from, and potentially more complete than, therapies
+    that address only one of these two mechanisms (e.g. an antibody-depleting biologic that does
+    not touch tissue macrophages, or an anti-inflammatory that does not touch antibody
+    production). When evaluating candidate indications, give weight to diseases where the primary
+    tissue damage plausibly involves BOTH a locally-produced or locally-deposited antibody
+    component AND macrophage-driven inflammation converging in the same affected organ, since
+    single-mechanism therapies for such diseases would by construction leave the other mechanism
+    unaddressed.
+  - >-
+    The Kv1.3 therapeutic window is unique. It suppresses plasma cells (Kv1.3-dominant, 1200+ channels/cell) while sparing naive B cells (KCa3.1-dominant). This means Kv1.3 inhibition can selectively target pathogenic humoral immunity. Consider which diseases are primarily driven by autoantibody production in a specific tissue.
+
+excluded_indications:
+  - Multiple Sclerosis (relapsing-remitting / EAE model) — Kv1.3 blockade is the textbook, extensively studied indication for this target; not novel
+  - Type 1 Diabetes (NOD mouse model) — well-established preclinical Kv1.3 indication
+  - Generalized / broad Rheumatoid Arthritis — established autoimmune indication for Kv1.3 blockers
+  - Psoriasis (plaque) — most clinically advanced Kv1.3 modulator program (e.g. dalazatide/ShK-186) targeted this indication directly

@@ -1,0 +1,18 @@
+{
+  "approved_aggregate_metrics": {
+    "gold_label_counts": {
+      "supported": 481
+    },
+    "source_unit_count": 481
+  },
+  "derivative": "benchmark-v5-audited-frozen-aggregate",
+  "protocol_identifiers": {
+    "judged_repetitions": 3,
+    "model": "bh:glm-5.1",
+    "seed": 20260728,
+    "target": "Kv1.3"
+  },
+  "schema_version": 1,
+  "source_manifest_sha256": "7133f60958c04dd9351d404937f1b78a6ff7874162b1949022530fe6b9de942b",
+  "source_units_sha256": "f50ae4c6b4e777da2d510cf48ebb6de277c47e6b2f0557c0f2060baece75e019"
+}

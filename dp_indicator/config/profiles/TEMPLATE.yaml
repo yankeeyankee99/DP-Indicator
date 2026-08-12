@@ -1,0 +1,82 @@
+# Target Profile Template — Copy this file and rename to {YourTarget}.yaml
+
+target_id: "YOUR_TARGET"
+official_name: "GENE (full protein name)"
+
+cell_type_expression:
+  example_cell_type:
+    level: high           # high / low / upregulated
+    channels_per_cell: 0  # numeric, optional
+    dependency: target-dominant   # target-dominant / other-dominant
+
+functional_chain:
+  - "Target activation → downstream event 1"
+  - "Downstream event 1 → downstream event 2"
+  - "Final physiological outcome"
+
+therapeutic_window:
+  suppressed:
+    - example_cell_type
+  spared:
+    - other_cell_type
+
+# Keep this list SHORT and each axis GENERIC — see profiles/README.md
+# "mechanistic_bridges 的收录原则" for the full rationale. In short: an axis
+# should describe one of the target's broad biological functions (relevant to
+# many possible diseases), not a mechanism fragment that already narrows things
+# down to one specific candidate disease. If a reader could guess a specific
+# organ/antibody-isotype/disease just from the axis name + mechanism text, it is
+# too narrow — generalize it or remove it.
+mechanistic_bridges:
+  - axis: example_axis
+    cell_types:
+      - example_cell_type
+    mechanism: >-
+      Describe how this mechanism axis connects the target's cell-type selectivity
+      to disease pathology. Keep it mechanism-level (no specific organ/disease names).
+
+# Optional: only needed if the target has more than one distinct biological role
+# (e.g. an ion channel with both an immune role and an unrelated neuronal role) and
+# gene-level disease-association lookups (OpenTargets/KEGG) would otherwise surface
+# associations from the role this profile does NOT model.
+mechanism_scope:
+  description: >-
+    This profile models the target's role in [X] — [mechanism cascade summary].
+    The target also has a separate, unrelated role in [Y], which this profile's
+    cell_type_expression / functional_chain does NOT cover. Disease associations
+    reflecting the [Y] role are out of this profile's scope.
+  out_of_scope_keywords:
+    - "keyword related to the unmodeled role"
+
+# L6 bridge-layer retrieval queries are generated procedurally from
+# mechanistic_bridges (axis + cell_types) above — no separate field needed here.
+# See dp_indicator/core/target_knowledge.py::get_bridge_search_terms.
+
+intersection_guidance: >-
+  When generating hypotheses, consider intersections between mechanism dimensions
+  and organ/disease dimensions. Look for combinations where:
+  (1) the target's mechanism is strongly relevant,
+  (2) a disease category involves that mechanism,
+  (3) but the target has NOT been directly studied in that disease.
+
+reasoning_guidance:
+  - "Reasoning principle 1: describe the target's unique therapeutic window"
+  - "Reasoning principle 2: what diseases share the mechanism of target-sensitive cells"
+  # Optional "convergence principle" pattern: if this profile has 2+ mechanistic_bridges
+  # axes, you can add one fully abstract, disease/organ-agnostic guidance entry stating
+  # that a therapy hitting multiple independent axes at once is mechanistically distinct
+  # from single-axis therapies — WITHOUT naming which disease that applies to. This must
+  # stay a general pharmacology criterion, not a disguised pointer to one candidate.
+
+# Optional: free-form background paragraph injected directly into the Reasoner's prompt,
+# for mechanistic detail that doesn't fit neatly into the structured fields above.
+supplemental_target_disease_context: >-
+  Additional background on the target's biology that helps the Reasoner interpret
+  evidence correctly (e.g. how the target's signaling cascade maps onto downstream
+  cell/tissue effects).
+
+# Indications already well-established/extensively studied for this target — the
+# Reasoner is told to avoid re-proposing these so it focuses on genuinely novel ones.
+excluded_indications: []
+
+key_publications: []
